@@ -1,7 +1,15 @@
-import  test, { expect } from "@playwright/test";
+import  { test, expect } from "@playwright/test";
+import { HomePage } from "pages/HomePage";
 
 test("Verify Title is not empty", async ({ page }) => {
-await page.goto("");
-const title = await page.title();
-expect(title).not.toBe("");
+
+    const homePage = new HomePage(page);
+
+    await homePage.navigateTo("");
+    
+    const title = await homePage.getTitle();
+    expect(title).not.toBe("");
+
+    const links = await homePage.getAvailableLinks();
+    expect(links.length).toBeGreaterThan(0);
 });
