@@ -1,15 +1,15 @@
 import { type Page } from '@playwright/test';
 
-export class BasePage {
-    readonly page: Page;
+export abstract class BasePage {
+    protected readonly page: Page;
 
     constructor(page: Page) {
         this.page = page;
     }
-    async navigateTo(path: string) {
+    async navigate(path: string) {
         await this.page.goto(path);
     }
     async getTitle(): Promise<string> {
-        return await this.page.title();
+        return this.page.title();
     }
 }
