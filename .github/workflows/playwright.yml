@@ -22,7 +22,7 @@ jobs:
       run: npm test
       continue-on-error: false
       env:
-        BASE_URL: ${{ secrets.PW_BASE_URL }}
+        BASE_URL: ${{ vars.PW_BASE_URL }}
         APP_USERNAME: ${{ secrets.APP_USERNAME }}
         APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
     - uses: actions/upload-artifact@v4
