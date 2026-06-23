@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:staging": "dotenv -e .env.staging npx playwright test",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed",
     "test:report": "npx playwright show-report"
@@ -14,6 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.61.0",
-    "@types/node": "^26.0.0"
+    "@types/node": "^26.0.0",
+    "dotenv": "^17.4.2",
+    "dotenv-cli": "^11.0.0"
   }
 }

@@ -8,6 +8,7 @@ import { LoginPage } from 'pages/LoginPage';
 type MyFixtures = {
   loginPage: LoginPage;
   homePage: HomePage;
+  authedLoginPage: LoginPage;
 };
 
 export const test = base.extend<MyFixtures> ({
@@ -19,6 +20,12 @@ export const test = base.extend<MyFixtures> ({
     loginPage: async ({ page }, use) => {
         const loginPage = new LoginPage(page);
         await loginPage.navigate("/login");
+        await use(loginPage);
+    },
+    authedLoginPage: async ({ page }, use) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate("/login");
+        await loginPage.login(process.env.APP_USERNAME!, process.env.APP_PASSWORD!);
         await use(loginPage);
     }
 });
