@@ -6,15 +6,16 @@ import { test, expect } from '@playwright/test';
     email: 'auto@dada.com'
 };
 
-test.beforeEach(async ({}, testInfo) => {
-    console.log(`Running: ${testInfo.title}`);
-});
-
-test.afterEach(async ({}, testInfo) => {
-    console.log(`Status: ${testInfo.status}`);
-});
 test.describe('API Tests', () => {
         
+    test.beforeEach(async ({}, testInfo) => {
+        console.log(`Running: ${testInfo.title}`);
+    });
+
+    test.afterEach(async ({}, testInfo) => {
+        console.log(`Status: ${testInfo.status}`);
+    });
+    
     test('GET users', async ({ request }) => {
         const response = await request.get('https://jsonplaceholder.typicode.com/users');
         expect(response.status()).toBe(200);
