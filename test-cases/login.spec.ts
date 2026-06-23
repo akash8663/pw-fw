@@ -1,35 +1,19 @@
-import { test, expect } from "@playwright/test";
-import { LoginPage } from "pages/LoginPage";
-
-const testData = {
-    validUser: "tomsmith",
-    validPassword: "SuperSecretPassword!",
-    invalidUser: "invalidUser",
-    invalidPassword: "invalidPassword"
-};
+import { expect, test } from "fixtures";
 
 test.describe('Login', () => {
 
-    test('Valid login succeeds', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.navigate("/login");
-        await loginPage.login(testData.validUser, testData.validPassword);
-        const isLoggedIn = await loginPage.isLoggedIn();
+    test('Valid login succeeds', async ({ authedLoginPage }) => {
+        const isLoggedIn = await authedLoginPage.isLoggedIn();
         expect(isLoggedIn).toBe(true);
     });
 
-    test("valid login shows success flash message", async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.navigate("/login");
-        await loginPage.login(testData.validUser, testData.validPassword);
-        const flashMessage = await loginPage.getFlashMessage();
+    test("valid login shows success flash message", async ({ authedLoginPage }) => {
+        const flashMessage = await authedLoginPage.getFlashMessage();
         expect(flashMessage).toContain("You logged into a secure area!");
     });
 
-    test("invalid login shows error flash message", async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.navigate("/login");
-        await loginPage.login(testData.invalidUser, testData.invalidPassword);
+    test("invalid login shows error flash message", async ({ loginPage }) => {
+        await loginPage.login("invalidUser", "invalidPassword");
         const flashMessage = await loginPage.getFlashMessage();
         expect(flashMessage).toContain("Your username is invalid!");
     });
