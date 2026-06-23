@@ -20,4 +20,4 @@ test('POST create user', async ({ request }) => {
     const body = await response.json();
     console.log(body);
     expect(body).toMatchObject(newUser);
-}
+});
