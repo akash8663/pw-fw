@@ -1,12 +1,7 @@
-import  { test, expect } from "@playwright/test";
-import { HomePage } from "pages/HomePage";
+import { expect, test } from "fixtures";
 
-test("Home page loads with title and navigation links", async ({ page }) => {
+test("Home page loads with title and navigation links", async ({ homePage }) => {
 
-    const homePage = new HomePage(page);
-
-    await homePage.navigate("");
-    
     const title = await homePage.getTitle();
     expect(title).not.toBe("");
 
