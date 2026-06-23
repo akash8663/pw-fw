@@ -1,5 +1,5 @@
-import { expect, test } from "fixtures";
-
+import { test, expect } from "@playwright/test";
+import { LoginPage } from "pages/LoginPage";
 
 const testData = {
     validUser: "tomsmith",
@@ -10,19 +10,25 @@ const testData = {
 
 test.describe('Login', () => {
 
-    test('Valid login succeeds', async ({ loginPage }) => {
+    test('Valid login succeeds', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate("/login");
         await loginPage.login(testData.validUser, testData.validPassword);
         const isLoggedIn = await loginPage.isLoggedIn();
         expect(isLoggedIn).toBe(true);
     });
 
-    test("valid login shows success flash message", async ({ loginPage }) => {
+    test("valid login shows success flash message", async ({ page }) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate("/login");
         await loginPage.login(testData.validUser, testData.validPassword);
         const flashMessage = await loginPage.getFlashMessage();
         expect(flashMessage).toContain("You logged into a secure area!");
     });
 
-    test("invalid login shows error flash message", async ({ loginPage }) => {
+    test("invalid login shows error flash message", async ({ page }) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.navigate("/login");
         await loginPage.login(testData.invalidUser, testData.invalidPassword);
         const flashMessage = await loginPage.getFlashMessage();
         expect(flashMessage).toContain("Your username is invalid!");
