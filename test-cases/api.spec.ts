@@ -1,23 +1,41 @@
 import { test, expect } from '@playwright/test';
 
-test('GET users', async ({ request }) => {
-    const response = await request.get('https://jsonplaceholder.typicode.com/users');
-    expect(response.status()).toBe(200);
-    const body = await response.json();
-    expect(Array.isArray(body)).toBe(true);  
+ const newUser = {
+    userId: 312,
+    username: 'AutomationDada',
+    email: 'auto@dada.com'
+};
+
+test.beforeEach(async ({}, testInfo) => {
+    console.log(`Running: ${testInfo.title}`);
 });
 
-test('POST create user', async ({ request }) => {
-    const newUser = {
-        name: 'John Doe',
-        username: 'johndoe',
-        email: 'kk@kk.com'
-    };
-    const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
-        data: newUser
+test.afterEach(async ({}, testInfo) => {
+    console.log(`Status: ${testInfo.status}`);
+});
+test.describe('API Tests', () => {
+        
+    test('GET users', async ({ request }) => {
+        const response = await request.get('https://jsonplaceholder.typicode.com/users');
+        expect(response.status()).toBe(200);
+        const body = await response.json();
+        expect(Array.isArray(body)).toBe(true);  
     });
-    expect(response.status()).toBe(201);
-    const body = await response.json();
-    console.log(body);
-    expect(body).toMatchObject(newUser);
+
+    test('POST create user', async ({ request }) => {
+        const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
+            data: newUser
+        });
+        expect(response.status()).toBe(201);
+        const body = await response.json();
+
+        expect(body.userId).toBeDefined();
+        expect(body.userId).toBe(newUser.userId);
+        expect(body).toMatchObject(newUser);
+    });
+
+    test('DELETE user', async ({ request }) => {
+        const response = await request.delete('https://jsonplaceholder.typicode.com/posts/101');
+        expect(response.status()).toBe(200);
+    });
 });
