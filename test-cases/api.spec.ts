@@ -1,11 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures/index';
 
- const newUser = {
-    userId: 312,
-    username: 'AutomationDada',
-    email: 'auto@dada.com',
-    title: "quaerat velit veniam amet cupiditate aut numquam ut sequi",
-    body: "in non odio excepturi sint eum\nlabore voluptates vitae quia qui et\ninventore itaque rerum\nveniam non exercitationem delectus aut"
+const newPost = {
+  title: 'QA Automation Post',
+  body: 'Created by Playwright API test',
+  userId: 312
 };
 
 test.describe('API Tests', () => {
@@ -27,7 +25,7 @@ test.describe('API Tests', () => {
 
     test('POST create user', async ({ request }) => {
         const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
-            data: newUser
+            data: newPost
         });
         expect(response.status()).toBe(201);
         const body = await response.json();
