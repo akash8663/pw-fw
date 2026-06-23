@@ -13,6 +13,6 @@ export class LoginPage extends BasePage {
     }
 
     async isLoggedIn(): Promise<boolean> {
-        return await this.page.getByRole('link', { name: 'Logout' }).isVisible();
+        return this.page.getByRole('link', { name: 'Logout' }).isVisible();
     }
 }
