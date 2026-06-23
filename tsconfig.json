@@ -9,5 +9,5 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "include": ["test-cases/**/*.ts", "pages/**/*.ts", "fixtures/**/*.ts", "playwright.config.ts"]
+  "include": ["test-cases/**/*.ts", "pages/**/*.ts", "playwright.config.ts"]
 }
