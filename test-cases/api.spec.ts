@@ -22,7 +22,7 @@ test.describe('API Tests', () => {
         const response = await request.get('https://jsonplaceholder.typicode.com/users');
         expect(response.status()).toBe(200);
         const body = await response.json();
-        expect(Array.isArray(body)).toBe(true);  
+        expect(body).toBeInstanceOf(Array);  
     });
 
     test('POST create user', async ({ request }) => {
