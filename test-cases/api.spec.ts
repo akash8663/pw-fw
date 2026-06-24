@@ -1,13 +1,12 @@
 import { test, expect } from '../fixtures/index';
 
 const newPost = {
-  title: 'QA Automation Post',
-  body: 'Created by Playwright API test',
-  userId: 312
+    title: 'QA Automation Post',
+    body: 'Created by Playwright API test',
+    userId: 312,
 };
 
 test.describe('API Tests', () => {
-        
     test.beforeEach(async ({}, testInfo) => {
         console.log(`Running: ${testInfo.title}`);
     });
@@ -20,12 +19,12 @@ test.describe('API Tests', () => {
         const response = await request.get('https://jsonplaceholder.typicode.com/posts');
         expect(response.status()).toBe(200);
         const body = await response.json();
-        expect(body).toBeInstanceOf(Array);  
+        expect(body).toBeInstanceOf(Array);
     });
 
     test('POST create post', async ({ request }) => {
         const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
-            data: newPost
+            data: newPost,
         });
         expect(response.status()).toBe(201);
         const body = await response.json();
