@@ -1,12 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export interface Post {
-  title: string;
-  body: string;
-  userId: number;
-}
-
-export function createPost(): Post {
+export function createPost() {
    return {
     title: faker.person.jobTitle(),
     body: faker.lorem.lines(1),
