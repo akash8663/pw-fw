@@ -1,10 +1,5 @@
 import { test, expect } from '../fixtures/index';
-
-const newPost = {
-    title: 'QA Automation Post',
-    body: 'Created by Playwright API test',
-    userId: 312,
-};
+import { createPost } from 'test-data';
 
 test.describe('API Tests', () => {
     test.beforeEach(async ({}, testInfo) => {
@@ -23,6 +18,7 @@ test.describe('API Tests', () => {
     });
 
     test('POST create post', async ({ request }) => {
+        const newPost = createPost();
         const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
             data: newPost,
         });
