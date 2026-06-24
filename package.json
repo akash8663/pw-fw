@@ -2,7 +2,7 @@
   "name": "pw-framework",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
     "test:staging": "dotenv -e .env.staging npx playwright test",
