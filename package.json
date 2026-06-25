@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:update-snapshots": "npx playwright test --update-snapshots",
     "test:staging": "dotenv -e .env.staging npx playwright test",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed",
@@ -17,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@faker-js/faker": "^10.5.0",
     "@playwright/test": "^1.61.0",
     "@types/node": "^26.0.0",
