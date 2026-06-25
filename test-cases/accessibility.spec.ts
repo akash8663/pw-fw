@@ -9,8 +9,6 @@ test.describe('homepage', () => {
         .disableRules(['color-contrast'])
         .analyze();
 
-    // expect(accessibilityScanResults.violations).toEqual([]);
-
     const criticalOrSerious = accessibilityScanResults.violations.filter(
       v => v.impact === 'critical' || v.impact === 'serious'
     );
